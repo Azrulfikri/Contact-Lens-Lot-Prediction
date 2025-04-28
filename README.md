@@ -35,7 +35,7 @@ The **Lot-level Total_Pass_Lens_Lot** (sum of batch pass counts) served as the t
 **Model Comparison (Batch Level):** Trained and evaluated several models on the preprocessed batch-level data, including RandomForestRegressor (Scikit-learn), XGBoost, and an MLP Neural Network (TensorFlow/Keras).
 **Model Selection:** Selected Random Forest as the most promising model based on initial batch-level evaluations (considering aggregated Lot-level metrics).
 **Hyperparameter Tuning:** Optimized the selected batch-level Random Forest model using RandomizedSearchCV(Scikit-learn) to maximize R-squared.
-**Prediction Aggregation:** Used the **tuned** Random Forest model to predictLens_Pass_Countfor all batches in the test set. Summed these predictions by Lot_ID to get the final predicted Total_Pass_Lens_Lot.
+**Prediction Aggregation:** Used the **tuned** Random Forest model to predict Lens_Pass_Countfor all batches in the test set. Summed these predictions by Lot_ID to get the final predicted Total_Pass_Lens_Lot.
 **Final Evaluation:** Calculated final Lot-level MAE, RMSE, and R² on the test set by comparing the aggregated predictions against the actual summed pass counts.
 **Residual Analysis:** Examined the residuals of the tuned batch-level model to validate model fit and assumptions.
 [Analysis Notebook](Project_3_Lot_Output_Prediction.ipynb)
