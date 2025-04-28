@@ -12,18 +12,18 @@ Predicting lot output based solely on aggregated summary statistics of its const
 There is a need for a reliable predictive model to estimate lot output based on detailed batch history, particularly considering factors like variable storage times.
 ## 3. Goal / Objective
 
-Primary Goal: Develop a machine learning regression model to accurately predictTotal_Pass_Lens_Lot(count) for a 6-batch production lot.
+Primary Goal: Develop a machine learning regression model to accurately predict Total_Pass_Lens_Lot (count) for a 6-batch production lot.
 Methodology Goal: Compare the predictive performance of modeling using aggregated lot-level features versus modeling using granular batch-level features (with aggregated predictions).
 Performance Goal: Achieve a high R-squared (>0.85, achieved 0.925) and low MAE/RMSE on the test set for lot output prediction using the best identified approach.
 Identify key batch-level features driving prediction accuracy.
 ## 4. Data
 
 Utilized **simulated data** (Python, Pandas, NumPy) reflecting multi-stage batch production, based on realistic process flows and domain expertise.
-Generated features for **individual batches** including:Power,Mould_Line,Storage_Duration_Days, upstream QC results (Mould_Dimension_QC_Result,Filling_QC_Result),Monomer_Lot_Number, andMould_In_Count.
-SimulatedLens_Pass_Countper batch was influenced by factors like storage duration (>180 days), low power range (-2.50D to 0.00D), and upstream QC results, targeting realistic batch yields (typically 70-95%).
-Batches were programmatically grouped into 'Lots' of 6 based on sharedPowerto prepare data for Lot ID-based splitting and final evaluation.
-The **batch-levelLens_Pass_Count** served as the target variable for the primary modeling approach (Approach 2).
-The **Lot-levelTotal_Pass_Lens_Lot** (sum of batch pass counts) served as the target for the alternative modeling approach (Approach 1) and the final evaluation metric.
+Generated features for **individual batches** including: Power, Mould_Line, Storage_Duration_Days, upstream QC results (Mould_Dimension_QC_Result, Filling_QC_Result), Monomer_Lot_Number, and Mould_In_Count.
+Simulated Lens_Pass_Count per batch was influenced by factors like storage duration (>180 days), low power range (-2.50D to 0.00D), and upstream QC results, targeting realistic batch yields (typically 70-95%).
+Batches were programmatically grouped into 'Lots' of 6 based on sharedPower to prepare data for Lot ID-based splitting and final evaluation.
+The **batch-level Lens_Pass_Count** served as the target variable for the primary modeling approach (Approach 2).
+The **Lot-level Total_Pass_Lens_Lot** (sum of batch pass counts) served as the target for the alternative modeling approach (Approach 1) and the final evaluation metric.
 ## 5. Methodology / Workflow
 
 **Data Simulation:** Generated batch-level data with realistic dependencies.
@@ -34,8 +34,8 @@ The **Lot-levelTotal_Pass_Lens_Lot** (sum of batch pass counts) served as the ta
 **Feature Engineering (Batch Level):** Prepared batch features (incl. storage duration, input count, QC status, power), applying One-Hot Encoding for categorical variables using Pandas.
 **Model Comparison (Batch Level):** Trained and evaluated several models on the preprocessed batch-level data, including RandomForestRegressor (Scikit-learn), XGBoost, and an MLP Neural Network (TensorFlow/Keras).
 **Model Selection:** Selected Random Forest as the most promising model based on initial batch-level evaluations (considering aggregated Lot-level metrics).
-**Hyperparameter Tuning:** Optimized the selected batch-level Random Forest model usingRandomizedSearchCV(Scikit-learn) to maximize R-squared.
-**Prediction Aggregation:** Used the **tuned** Random Forest model to predictLens_Pass_Countfor all batches in the test set. Summed these predictions byLot_IDto get the final predictedTotal_Pass_Lens_Lot.
+**Hyperparameter Tuning:** Optimized the selected batch-level Random Forest model using RandomizedSearchCV(Scikit-learn) to maximize R-squared.
+**Prediction Aggregation:** Used the **tuned** Random Forest model to predictLens_Pass_Countfor all batches in the test set. Summed these predictions by Lot_ID to get the final predicted Total_Pass_Lens_Lot.
 **Final Evaluation:** Calculated final Lot-level MAE, RMSE, and R² on the test set by comparing the aggregated predictions against the actual summed pass counts.
 **Residual Analysis:** Examined the residuals of the tuned batch-level model to validate model fit and assumptions.
 [Analysis Notebook](Project_3_Lot_Output_Prediction.ipynb)
@@ -52,7 +52,7 @@ The **Lot-levelTotal_Pass_Lens_Lot** (sum of batch pass counts) served as the ta
 **Mould_In_Count**: Most dominant factor.
 **Storage_Duration_Days**: Second most critical predictor.
 **Is_Low_Powe_Lot**: Flag for low power range (-2.5D to 0.0D) ranked third.
-**Upstream QC Results** (Mould_Dimension_QC_Result_Pass,Filling_QC_Result_Pass): Also contributed. *(Consider embedding the final RF feature importance plot here)*
+**Upstream QC Results** (Mould_Dimension_QC_Result_Pass, Filling_QC_Result_Pass): Also contributed.
 **Residual Analysis:** Indicated the final model was generally well-behaved with no major systematic errors, supporting the validity of the results.
 ## 7. Conclusions & Business Impact
 
