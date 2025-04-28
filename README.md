@@ -21,7 +21,7 @@ Identify key batch-level features driving prediction accuracy.
 Utilized **simulated data** (Python, Pandas, NumPy) reflecting multi-stage batch production, based on realistic process flows and domain expertise.
 Generated features for **individual batches** including: Power, Mould_Line, Storage_Duration_Days, upstream QC results (Mould_Dimension_QC_Result, Filling_QC_Result), Monomer_Lot_Number, and Mould_In_Count.
 Simulated Lens_Pass_Count per batch was influenced by factors like storage duration (>180 days), low power range (-2.50D to 0.00D), and upstream QC results, targeting realistic batch yields (typically 70-95%).
-Batches were programmatically grouped into 'Lots' of 6 based on sharedPower to prepare data for Lot ID-based splitting and final evaluation.
+Batches were programmatically grouped into 'Lots' of 6 batches based on sharedPower to prepare data for Lot ID-based splitting and final evaluation.
 The **batch-level Lens_Pass_Count** served as the target variable for the primary modeling approach (Approach 2).
 The **Lot-level Total_Pass_Lens_Lot** (sum of batch pass counts) served as the target for the alternative modeling approach (Approach 1) and the final evaluation metric.
 ## 5. Methodology / Workflow
