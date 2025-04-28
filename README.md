@@ -45,9 +45,9 @@ The **Lot-level Total_Pass_Lens_Lot** (sum of batch pass counts) served as the t
 
 **Batch-Level Modeling Superiority:** Predicting at the individual batch level and aggregating results (Approach 2) significantly outperformed modeling directly on aggregated lot-level features (Approach 1).
 **Tuned Random Forest Performance:** The optimized Random Forest Regressor trained on batch-level data achieved high accuracy for predicting the final aggregated lot output:
-**R-squared (Test Set): 0.925** (explaining ~93% of variance)
-**MAE (Test Set): ≈ 102 lenses** (average error per lot)
-**RMSE (Test Set): ≈ 126 lenses**
+**R-squared (Test Set): 0.931** (explaining ~93% of variance)
+**MAE (Test Set): ≈ 93 lenses** (average error per lot)
+**RMSE (Test Set): ≈ 120 lenses**
 **Key Batch-Level Drivers:** Feature importance analysis of the best RF model highlighted:
 **Mould_In_Count**: Most dominant factor.
 **Storage_Duration_Days**: Second most critical predictor.
